@@ -20,3 +20,12 @@ async def search_artist(query:str):
         return response.json()
     
 
+async def get_artist_releases(artist_id:int):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"{MUSICBRAINZ_URL}/artist",
+            params={"artist_id": artist_id, "fmt": "json"},
+            headers=HEADERS
+        )
+        
+        return response.json()
